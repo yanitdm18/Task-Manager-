@@ -1,5 +1,5 @@
 # Task-Manager-
-full stack application project 
+ 
 Project Name: Task Manager
 Description:
 Task Manager is a full-stack web application designed to help users organize their tasks and manage their time effectively. Users can create an account, log in, and start adding tasks to their dashboard. They can categorize tasks, set deadlines, mark tasks as completed, and prioritize them based on urgency.
