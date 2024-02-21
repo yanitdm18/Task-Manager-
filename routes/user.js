@@ -1,4 +1,4 @@
-const secretKey = 'hush_hush_123'; 
+
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
@@ -45,7 +45,7 @@ router.post('/login', async (req, res) => {
 
     // Generate JWT token
     const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' });
-    
+    const secretKey = require('./config'); 
     // Return the token
     res.json({ token });
   } catch (err) {
