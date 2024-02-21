@@ -5,20 +5,21 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 const main = async () => {
   try {
-    // categories
+    console.log('Seeding database...');
+    //  categories
     const categories = await Category.insertMany([
       { name: 'Work', priority: 'High' },
       { name: 'Personal', priority: 'Medium' },
       { name: 'Shopping', priority: 'Low' }
-      // Add more categories as needed
+      
     ]);
     console.log('Seeded categories:', categories);
 
-    // users
+    //  users
     const users = await User.insertMany([
       { username: 'user1', email: 'user1@example.com', password: 'password1' },
       { username: 'user2', email: 'user2@example.com', password: 'password2' },
-      // Add more users as needed
+      
     ]);
     console.log('Seeded users:', users);
 
@@ -31,18 +32,19 @@ const main = async () => {
         category: categories.find(category => category.name === 'Work')._id,
         user: users[0]._id
       },
-      // Add more tasks as needed
+      
     ]);
     console.log('Seeded tasks:', tasks);
+
+    console.log('Database seeding completed.');
   } catch (error) {
     console.error('Error seeding database:', error);
+  } finally {
+   
+    db.close();
   }
 };
 
-const run = async () => {
-  await main();
-  db.close();
-};
+main();
 
-run();
 
