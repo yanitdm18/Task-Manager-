@@ -4,7 +4,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
-
+const secretKey = require('./config'); 
 // user registration
 router.post('/register', async (req, res) => {
   try {
@@ -44,8 +44,7 @@ router.post('/login', async (req, res) => {
     }
 
     // Generate JWT token
-    const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' });
-    const secretKey = require('./config'); 
+    const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' }); 
     // Return the token
     res.json({ token });
   } catch (err) {

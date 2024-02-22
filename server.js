@@ -1,3 +1,5 @@
+const path = require('path');
+
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/taskManagerDatabase', {
   useNewUrlParser: true,
@@ -19,13 +21,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors())
 app.use(express.json())
 
-app.get('/', (req, res) => {
-  res.send('This is root!')
-})
-
+app.get('/test', (req, res) => {
+    res.send('This is a test route!');
+  });
+  
 app.listen(PORT, () => {
   console.log(`Express server listening on port ${PORT}`)
 })
+
 
 
 
