@@ -25,7 +25,7 @@ Task Manager is a full-stack web application designed to help users organize the
   - Bootstrap or Material-UI for styling
 - **Backend:**
   - Node.js (Express.js)
-  - MongoDB or PostgreSQL for database management
+  - MongoDB 
 - **Authentication:**
   - JWT (JSON Web Tokens) for user authentication
 - **Others:**
