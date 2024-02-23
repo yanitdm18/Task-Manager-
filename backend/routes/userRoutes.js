@@ -1,30 +1,58 @@
-// backend/routes/userRoutes.js
 
 const express = require('express');
 const router = express.Router();
-const User = require('../../seed/User');
+const User = require('../models/User'); // Import your User model
+const userController = require('../controllers/userController'); // Import the user controller
+
 // Route for user login
 router.post('/login', async (req, res) => {
-    // Check user credentials and perform authentication
-    // For demonstration purposes, let's assume authentication is successful
-    const loggedInUser = { username: 'exampleUser' };
-  // Redirect the user to the dashboard
-  res.redirect('/dashboard.html');
+  try {
+    const { email, password } = req.body;
+
+    // Check if user exists
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Validate password
+    if (user.password !== password) {
+      return res.status(401).json({ message: 'Invalid password' });
+    }
+
+    // Redirect the user to the dashboard upon successful login
+    res.redirect('/dashboard.html');
+  } catch (error) {
+    console.error('Login error:', error.message);
+    res.status(500).json({ message: 'Login failed' });
+  }
 });
 
 // Route for user signup
 router.post('/signup', async (req, res) => {
-  // Create a new user based on signup form data
-  // For demonstration purposes, let's assume user creation is successful
-  const newUser = await User.create(req.body);
+  try {
+    const { username, email, password } = req.body;
 
-  // Redirect the user to the dashboard
-  res.redirect('/dashboard.html');
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return res.status(409).json({ message: 'User already exists' });
+    }
+
+    // Create a new user
+    const newUser = await User.create({ username, email, password });
+
+    // Redirect the user to the dashboard upon successful signup
+    res.redirect('/dashboard.html');
+  } catch (error) {
+    console.error('Signup error:', error.message);
+    res.status(500).json({ message: 'Signup failed' });
+  }
 });
-// Import the user controller
-const userController = require('../controllers/userController');
 
-// Define routes
+// Define routes using controller functions for CRUD operations
 router.get('/', userController.getAllUsers);
 router.get('/:id', userController.getUserById);
 router.post('/', userController.createUser);
@@ -32,3 +60,4 @@ router.put('/:id', userController.updateUser);
 router.delete('/:id', userController.deleteUser);
 
 module.exports = router;
+

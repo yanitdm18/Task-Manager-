@@ -1,8 +1,8 @@
 //modules
 const mongoose = require('mongoose');
 const User = require('./User'); // Assuming User.js is in the same directory as seed.js
-const Task = require('./Task');
-const Category = require('./Category');
+const Task = require('../backend/models/Task');
+const Category = require('../backend/models/Category');
 
 
 // Connect to MongoDB database
