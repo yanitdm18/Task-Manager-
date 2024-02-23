@@ -1,50 +1,52 @@
-const db = require('../db');
-const { User, Task, Category } = require('../models');
+//modules
+const mongoose = require('mongoose');
+const User = require('./User'); // Assuming User.js is in the same directory as seed.js
+const Task = require('./Task');
+const Category = require('./Category');
 
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
-const main = async () => {
-  try {
-    console.log('Seeding database...');
-    //  categories
-    const categories = await Category.insertMany([
-      { name: 'Work', priority: 'High' },
-      { name: 'Personal', priority: 'Medium' },
-      { name: 'Shopping', priority: 'Low' }
+// Connect to MongoDB database
+mongoose.connect('mongodb://localhost:27017/myTaskManagerDatabase', { useNewUrlParser: true, useUnifiedTopology: true });
+
+const users = [
+  { username: 'user1', email: 'user1@example.com', password: 'password1' },
+  { username: 'user2', email: 'user2@example.com', password: 'password2' }
+];
+
+const tasks = [
+  { title: 'Task 1', description: 'Description for Task 1', priority: 'high', completed: false, userId: '<userId>' },
+  { title: 'Task 2', description: 'Description for Task 2', priority: 'medium', completed: false, userId: '<userId>' },
+ 
+];
+
+const categories = [
+    
+        { name: 'Work', description: 'Tasks related to work responsibilities.' },
+        { name: 'School', description: 'Tasks related to academic studies or projects.' },
+        { name: 'Chores', description: 'Tasks related to household chores or errands.' },
+       
+      ];
       
-    ]);
-    console.log('Seeded categories:', categories);
-
-    //  users
-    const users = await User.insertMany([
-      { username: 'user1', email: 'user1@example.com', password: 'password1' },
-      { username: 'user2', email: 'user2@example.com', password: 'password2' },
-      
-    ]);
-    console.log('Seeded users:', users);
-
-    //  tasks
-    const tasks = await Task.insertMany([
-      {
-        name: 'Complete project proposal',
-        description: 'Write and submit project proposal for review',
-        completed: false,
-        category: categories.find(category => category.name === 'Work')._id,
-        user: users[0]._id
-      },
-      
-    ]);
-    console.log('Seeded tasks:', tasks);
-
-    console.log('Database seeding completed.');
-  } catch (error) {
-    console.error('Error seeding database:', error);
-  } finally {
-   
-    db.close();
-  }
-};
-
-main();
-
-
+User.insertMany(users)
+  .then((userDocs) => {
+    console.log('Users seeded successfully:', userDocs);
+    
+ 
+    const tasksWithUserIds = tasks.map(task => ({ ...task, userId: userDocs[0]._id }));
+    return Task.insertMany(tasksWithUserIds);
+  })
+  .then((taskDocs) => {
+    console.log('Tasks seeded successfully:', taskDocs);
+    
+    
+    return Category.insertMany(categories);
+  })
+  .then((categoryDocs) => {
+    console.log('Categories seeded successfully:', categoryDocs);
+    
+    mongoose.connection.close(); 
+  })
+  .catch((err) => {
+    console.error('Error seeding data:', err);
+    mongoose.connection.close(); 
+  });

@@ -1,35 +1,36 @@
+// server.js
+
+const express = require('express');
 const path = require('path');
-
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/taskManagerDatabase', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-  console.log('Connected to MongoDB database');
-});
+const bodyParser = require('body-parser');
+const cors = require('cors');
 
-const express = require('express')
-const cors = require('cors')
-const PORT = process.env.PORT || 3001
+const app = express();
+app.use(express.static(path.join(__dirname, 'frontend', 'public')));
+// Middleware
+app.use(bodyParser.json());
+app.use(cors());
 
-const app = express()
-app.use(express.static(path.join(__dirname, 'public')));
+// MongoDB Configuration
+const dbURI = 'mongodb://localhost:27017/myTaskManagerDatabase';
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
-app.use(cors())
-app.use(express.json())
+// Import routes
+const userRoutes = require('./backend/routes/userRoutes');
+const taskRoutes = require('./backend/routes/taskRoutes');
+const categoryRoutes = require('./backend/routes/categoryRoutes');
 
-app.get('/test', (req, res) => {
-    res.send('This is a test route!');
-  });
-  
+// Use routes
+app.use('/api/users', userRoutes);
+app.use('/api/tasks', taskRoutes);
+app.use('/api/categories', categoryRoutes);
+
+// Start the server
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Express server listening on port ${PORT}`)
-})
+  console.log(`Server is running on port ${PORT}`);
+});
 
-
-
-
-  
