@@ -14,7 +14,7 @@
     <h1 class="title">Task Track</h1>
     <div class="form-container">
       <h2>Login</h2>
-      <form id="login-form" action="/api/users/login" method="POST">
+      <form id="login-form" >
         <div class="form-group">
           <label for="email">Email:</label>
           <input type="email" id="email" name="email" required>
@@ -24,12 +24,24 @@
           <input type="password" id="password" name="password" required>
         </div>
         <button type="submit" class="btn">Login</button>
+        <script src="index.js"></script>
       </form>
+     
     </div>
 
     <div class="signup-link">
       <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
     </div>
   </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('login-form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Redirect to dashboard.html
+        window.location.href = '/dashboard.html';
+      });
+    });
+  </script>
 </body>
 </html>

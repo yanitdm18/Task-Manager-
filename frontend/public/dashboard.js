@@ -1,46 +1,50 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // tasks data
-    const tasks = [
-      { name: 'Task 1', priority: 'High', completed: false },
-      { name: 'Task 2', priority: 'Medium', completed: false },
-      { name: 'Task 3', priority: 'Low', completed: true }
-    ];
-  
-    //render tasks
-    function renderTasks() {
-      const tasksContainer = document.getElementById('tasks-container');
-      tasksContainer.innerHTML = '';
-  
-      tasks.forEach(task => {
-        const taskElement = document.createElement('div');
-        taskElement.innerHTML = `
-          <div>
-            <span>Name: ${task.name}</span>
-            <span>Priority: ${task.priority}</span>
-            <span>Status: ${task.completed ? 'Completed' : 'Pending'}</span>
-          </div>
-        `;
-        if (task.completed) {
-            const achievementStatus = document.createElement('span');
-            achievementStatus.textContent = '🏆 Achievement Unlocked: Task Completed!';
-            achievementStatus.style.color = 'hot pink';
-            taskElement.appendChild(achievementStatus);
-        }
-        tasksContainer.appendChild(taskElement);
-      });
-    }
-  
-    // Render initial tasks
-    renderTasks();
-  
-    //  add new task
-    function addTask(task) {
-      tasks.push(task);
-      renderTasks();
-    }
-  
-    //  adding a new task
-    const newTask = { name: 'New Task', priority: 'High', completed: false };
-    addTask(newTask);
+// Function to handle task creation form submission
+function addTask(event) {
+  event.preventDefault();
+
+  const taskName = document.getElementById('taskName').value;
+  const priority = document.getElementById('priority').value;
+
+  const task = {
+      name: taskName,
+      priority: priority
+  };
+
+  fetch('/api/tasks/addtask', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(task)
+  })
+  .then(response => {
+      if (response.ok) {
+          // Clear the form
+          document.getElementById('taskName').value = '';
+          document.getElementById('priority').value = 'low';
+
+          // Append task to the appropriate task list
+          renderTask(task);
+      } else {
+          console.error('Failed to add task');
+      }
   });
+}
+
+// Function to render a single task
+function renderTask(task) {
+  const taskList = document.getElementById(`${task.priority}PriorityList`);
+  const taskItem = document.createElement('li');
+  taskItem.textContent = task.name;
+  taskList.appendChild(taskItem);
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById('task-form').addEventListener('submit', addTask);
+});
+
+
+
+
+
   

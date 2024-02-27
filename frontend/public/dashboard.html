@@ -1,29 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Track</title>
-    <link rel="stylesheet" href="dashboard.css"> <!-- Add your CSS file if needed -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Track</title>
+  <link rel="stylesheet" href=""">
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to your Dashboard! </h1>
-        <form id="task-form">
-            <label for="task">Task:</label>
-            <input type="text" id="task" name="task" required>
-            <label for="priority">Priority:</label>
-            <select id="priority" name="priority">
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-            </select>
-            <button type="submit">Add Task</button>
-        </form>
-        <div id="container">
-      
-        </div>
+  <div class="container">
+    <h1 class="title">Task Track</h1>
+    <div class="columns-container">
+      <div class="column" id="todoList">
+        <h2>Welcome to your dashboard!</h2>
+        <ul id="todoListTasks" class="task-list">
+          <!-- Tasks for the To-Do List will be appended here -->
+        </ul>
+      </div>
     </div>
-    <script src="dashboard.js"></script> 
+  </div>
+
+  <div class="form-container">
+    <form id="task-form">
+      <div class="form-group">
+        <label for="taskName">Task Name:</label>
+        <input type="text" id="taskName" name="taskName" required>
+      </div>
+      <div class="form-group">
+        <label for="priority">Priority:</label>
+        <select id="priority" name="priority">
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+      </div>
+      <button type="submit" class="btn">Add Task</button>
+    </form>
+  </div>
+  <div class="task-submissions">
+    <h2>To Do List</h2>
+    <ul id="taskSubmissions" class="task-list">
+      <!-- All task submissions will be appended here -->
+    </ul>
+  </div>
+</div>
+  <script src="dashboard.js"></script>
 </body>
 </html>
+
+
+
