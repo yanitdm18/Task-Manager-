@@ -5,7 +5,7 @@ const User = require('../models/User'); // Import your User model
 const userController = require('../controllers/userController'); // Import the user controller
 
 // Route for user login
-router.post('/login', async (req, res) => {
+router.post('/api/users/login', async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -30,7 +30,7 @@ router.post('/login', async (req, res) => {
 });
 
 // Route for user signup
-router.post('/signup', async (req, res) => {
+router.post('api/users/signup', async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
@@ -43,7 +43,7 @@ router.post('/signup', async (req, res) => {
 
     // Create a new user
     const newUser = await User.create({ username, email, password });
-
+    await newUser.save();
     // Redirect the user to the dashboard upon successful signup
     res.redirect('/dashboard.html');
   } catch (error) {
@@ -53,11 +53,11 @@ router.post('/signup', async (req, res) => {
 });
 
 // Define routes using controller functions for CRUD operations
-router.get('/', userController.getAllUsers);
-router.get('/:id', userController.getUserById);
-router.post('/', userController.createUser);
-router.put('/:id', userController.updateUser);
-router.delete('/:id', userController.deleteUser);
+router.get('/api/users', userController.getAllUsers);
+router.get('/api/users/:id', userController.getUserById);
+router.post('/api/users/signup', userController.createUser);
+router.put('/api/users/:id', userController.updateUser);
+router.delete('/api/users/:id', userController.deleteUser);
 
 module.exports = router;
 

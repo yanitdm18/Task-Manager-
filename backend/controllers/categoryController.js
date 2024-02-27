@@ -1,37 +1,77 @@
 // backend/controllers/categoryController.js
-
-// Example of category controller functions
+const Category = require('../models/Category'); // Assuming you have a Category model defined
 
 // Get all categories
-const getAllCategories = (req, res) => {
-    // Implementation to get all categories from the database
-  };
-  
-  // Get category by ID
-  const getCategoryById = (req, res) => {
-    // Implementation to get category by ID from the database
-  };
-  
-  // Create a new category
-  const createCategory = (req, res) => {
-    // Implementation to create a new category in the database
-  };
-  
-  // Update category by ID
-  const updateCategory = (req, res) => {
-    // Implementation to update category by ID in the database
-  };
-  
-  // Delete category by ID
-  const deleteCategory = (req, res) => {
-    // Implementation to delete category by ID from the database
-  };
-  
-  module.exports = {
-    getAllCategories,
-    getCategoryById,
-    createCategory,
-    updateCategory,
-    deleteCategory
-  };
-  
+const getAllCategories = async (req, res) => {
+  try {
+    const categories = await Category.find();
+    res.json(categories);
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+// Get category by ID
+const getCategoryById = async (req, res) => {
+  try {
+    const category = await Category.findById(req.params.id);
+    if (!category) {
+      return res.status(404).json({ message: 'Category not found' });
+    }
+    res.json(category);
+  } catch (error) {
+    console.error('Error fetching category by ID:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+// Create a new category
+const createCategory = async (req, res) => {
+  try {
+    const { name, description } = req.body;
+    const newCategory = new Category({ name, description });
+    await newCategory.save();
+    res.status(201).json(newCategory);
+  } catch (error) {
+    console.error('Error creating category:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+// Update category by ID
+const updateCategory = async (req, res) => {
+  try {
+    const { name, description } = req.body;
+    const updatedCategory = await Category.findByIdAndUpdate(req.params.id, { name, description }, { new: true });
+    if (!updatedCategory) {
+      return res.status(404).json({ message: 'Category not found' });
+    }
+    res.json(updatedCategory);
+  } catch (error) {
+    console.error('Error updating category by ID:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+// Delete category by ID
+const deleteCategory = async (req, res) => {
+  try {
+    const deletedCategory = await Category.findByIdAndDelete(req.params.id);
+    if (!deletedCategory) {
+      return res.status(404).json({ message: 'Category not found' });
+    }
+    res.status(204).send();
+  } catch (error) {
+    console.error('Error deleting category by ID:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+module.exports = {
+  getAllCategories,
+  getCategoryById,
+  createCategory,
+  updateCategory,
+  deleteCategory
+};
