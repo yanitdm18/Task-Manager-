@@ -24,7 +24,7 @@ MVP GOALS:
   - MongoDB 
 - **Others:**
   - Git for version control
-
+FIGMA LINK: https://www.figma.com/file/oKdovZHb7SIA3t0CGbTzUI/Untitled?type=design&node-id=0%3A1&mode=design&t=76sZgAJDkZete7r2-1
 
 <img width="942" alt="Screenshot 2024-02-27 at 11 48 32 PM" src="https://github.com/yanitdm18/Task-Manager-/assets/156823558/2aaa15a9-0a2d-4670-8564-9fc942565d44">
 
