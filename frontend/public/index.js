@@ -4,10 +4,10 @@ const taskForm = document.getElementById('taskForm');
 const taskNameInput = document.getElementById('taskName');
 const prioritySelect = document.getElementById('priority');
 const taskList = document.getElementById('taskList');
-
+const todoContainer = document.getElementById('todoContainer');
 // Function to fetch tasks from the API and render them
 async function fetchTasks() {
-    taskList.innerHTML = ''; // Clear the existing task list
+    taskList.innerHTML = ''; 
     const response = await fetch('/api/tasks');
     const tasks = await response.json();
     tasks.forEach(task => {
@@ -32,8 +32,8 @@ async function addTask(event) {
         body: JSON.stringify(task)
     });
     if (response.ok) {
-        fetchTasks(); // Refresh the task list
-        taskNameInput.value = ''; // Clear the task name input
+        fetchTasks(); 
+        taskNameInput.value = ''; 
     } else {
         console.error('Failed to add task');
     }

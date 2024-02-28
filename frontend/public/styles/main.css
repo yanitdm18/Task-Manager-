@@ -1,111 +1,33 @@
-/* dashboard.css */
-
-/* Body styles */
+/* Set background gradient */
 body {
     background: linear-gradient(135deg, #FF6B6B, #FFCC5C);
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-/* Container styles */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-/* Title styles */
-.title {
-    font-size: 3em;
-    color: #f75307;
-    margin-bottom: 20px;
-}
-
-/* Columns container styles */
-.columns-container {
-    display: flex;
-    justify-content: space-between;
+  }
+  
+  /* Container for the To-Do list */
+  .todoContainer {
     width: 80%;
-    margin-top: 20px;
-}
-
-/* Column styles */
-.column {
-    flex: 1;
-    border: 2px solid #ccc;
-    border-radius: 10px;
+    margin: 0 auto;
     padding: 20px;
-    max-height: 500px;
-    overflow-y: auto;
-    text-align: center;
-}
-
-/* Column header styles */
-.column h2 {
-    font-size: 1em;
-    margin-top: 0;
-}
-
-/* Form container styles */
-.form-container {
-    background-color: #FFE0B2;
-    padding: 20px;
+    background-color: #f7b7db; /* White background */
     border-radius: 10px;
-    margin-top: 20px;
-    width: 30%;
-}
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Drop shadow */
+    height: 300px;
+  }
+  
+  /* Style the task input form */
+  .task-form {
+    width: 90%; /* Make it larger */
+    margin-bottom: 20px;
+    height: 50px;
+  }
+  
+  /* Style the priority drop-down */
+  .priority-dropdown {
+    width: 300px; /* Make it a bit larger */
+  }
+  
 
-/* Form group styles */
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    font-weight: bold;
-    display: block;
-}
-
-.form-group input[type="text"],
-.form-group select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    margin-bottom: 15px;
-}
-
-/* Button styles */
-.btn {
-    background-color: #FF6B6B;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.btn:hover {
-    background-color: #FF4081;
-}
-
-/* Task list styles */
-.task-list {
-    list-style-type: none;
-    padding: 0;
-    margin-top: 20px;
-}
-
-.task-list li {
-    background-color: #f9f9f9;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-}
+ 
 
 
 

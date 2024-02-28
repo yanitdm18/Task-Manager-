@@ -4,23 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Task Track</title>
-  <link rel="stylesheet" href=""">
+  <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-  <div class="container">
     <h1 class="title">Task Track</h1>
     <div class="columns-container">
       <div class="column" id="todoList">
         <h2>Welcome to your dashboard!</h2>
-        <ul id="todoListTasks" class="task-list">
-          <!-- Tasks for the To-Do List will be appended here -->
-        </ul>
       </div>
     </div>
   </div>
 
   <div class="form-container">
-    <form id="task-form">
+    <form id="task-form" class="task-form"
       <div class="form-group">
         <label for="taskName">Task Name:</label>
         <input type="text" id="taskName" name="taskName" required>
@@ -36,13 +32,17 @@
       <button type="submit" class="btn">Add Task</button>
     </form>
   </div>
-  <div class="task-submissions">
+  <div class="todoContainer" >
     <h2>To Do List</h2>
-    <ul id="taskSubmissions" class="task-list">
+    <ul id="todoListTasks" class="task-list">
       <!-- All task submissions will be appended here -->
+      <li>  
+        <span>Task Name - Priority: High</span>
+            <button class="btn-update">Update</button>
+            <button class="btn-delete">Delete</button>
+      </li>
     </ul>
   </div>
-</div>
   <script src="dashboard.js"></script>
 </body>
 </html>
