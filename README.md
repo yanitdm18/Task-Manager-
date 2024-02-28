@@ -5,7 +5,7 @@
 Task Manager is a full-stack web application designed to help users organize their tasks efficiently. Users can create, update, and delete tasks, assign them to different categories, and track their progress.
 
 ## Features
-
+MVP GOALS: 
 - **User Authentication:** Users can sign up, log in, and log out securely.
 - **Task Management:**
   - CRUD operations for tasks (Create, Read, Update, Delete).
