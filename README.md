@@ -14,24 +14,19 @@ Task Manager is a full-stack web application designed to help users organize the
 - **Category Management:**
   - CRUD operations for categories.
   - Assign tasks to categories.
-- **Search and Filter:** Users can search for specific tasks and filter them based on various criteria.
-- **Responsive UI:** The application has a clean and intuitive user interface, ensuring a seamless experience across devices.
 
 ## Technologies Used
-
 - **Frontend:**
   - HTML/CSS
   - JavaScript (React.js)
-  - Bootstrap or Material-UI for styling
 - **Backend:**
   - Node.js (Express.js)
   - MongoDB 
-- **Authentication:**
-  - JWT (JSON Web Tokens) for user authentication
 - **Others:**
   - Git for version control
 
 
+<img width="942" alt="Screenshot 2024-02-27 at 11 48 32 PM" src="https://github.com/yanitdm18/Task-Manager-/assets/156823558/2aaa15a9-0a2d-4670-8564-9fc942565d44">
 
 
-
+<img width="841" alt="Screenshot 2024-02-27 at 11 52 05 PM" src="https://github.com/yanitdm18/Task-Manager-/assets/156823558/f93bfb73-055f-4af8-a61f-779f3d01e52b">
